@@ -1,4 +1,4 @@
-package com.error.errorhandler;
+package com.error.errorhandlerapplication;
 
 import org.junit.Test;
 

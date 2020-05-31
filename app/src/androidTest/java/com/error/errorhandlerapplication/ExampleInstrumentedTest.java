@@ -1,4 +1,4 @@
-package com.error.errorhandler;
+package com.error.errorhandlerapplication;
 
 import android.content.Context;
 
@@ -23,6 +23,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.error.errorhandler.test", appContext.getPackageName());
+        assertEquals("com.error.errorhandlerapplication", appContext.getPackageName());
     }
 }

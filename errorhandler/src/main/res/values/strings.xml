@@ -1,5 +1,5 @@
 <resources>
-
+    <string name="app_name">ErrorHandler</string>
     <string name="Error_Log" translatable="false">Error Log</string>
     <string name="Copy_Log_Close" translatable="false"><![CDATA[Copy Log & Close]]></string>
     <string name="Close">Close</string>
@@ -13,4 +13,5 @@
     <string name="Error_Log_Copied" translatable="false">Error Log Copied</string>
     <string name="email_welcome_note">Dear Dev Team,\n\nApplication is just crashed, please check following error log for more details.\n\n\n</string>
     <string name="comma_separated_email_addresses" translatable="false">comma separated email addresses</string>
+
 </resources>
