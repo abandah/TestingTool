@@ -61,7 +61,7 @@ public final class UCEDefaultActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         setTheme(android.R.style.Theme_Holo_Light_DarkActionBar);
         super.onCreate(savedInstanceState);
-        setContentView(com.error.errorhandler.R.layout.default_error_activity);
+        setContentView(R.layout.default_error_activity);
         try {
            /* new UCEHandler.Builder(this)
                     .setTrackActivitiesEnabled(false)
@@ -73,7 +73,7 @@ public final class UCEDefaultActivity extends Activity {
         } catch (Exception e) {
 
         }
-        findViewById(com.error.errorhandler.R.id.button_close_app).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_close_app).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UCEHandler.closeApplication(UCEDefaultActivity.this);
@@ -81,7 +81,7 @@ public final class UCEDefaultActivity extends Activity {
             }
         });
 
-        findViewById(com.error.errorhandler.R.id.button_restart_app).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_restart_app).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 UCEHandler.RestartApplication(UCEDefaultActivity.this);
@@ -89,37 +89,37 @@ public final class UCEDefaultActivity extends Activity {
                 // SendError();
             }
         });
-        findViewById(com.error.errorhandler.R.id.button_copy_error_log).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_copy_error_log).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 copyErrorToClipboard();
             }
         });
-        findViewById(com.error.errorhandler.R.id.button_share_error_log).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_share_error_log).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 shareErrorLog();
             }
         });
-        findViewById(com.error.errorhandler.R.id.button_save_error_log).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_save_error_log).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 saveErrorLogToFile(true);
             }
         });
-        findViewById(com.error.errorhandler.R.id.button_email_error_log).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_email_error_log).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 emailErrorLog();
             }
         });
-        findViewById(com.error.errorhandler.R.id.button_view_error_log).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.button_view_error_log).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog dialog = new AlertDialog.Builder(UCEDefaultActivity.this)
-                        .setTitle(getString(com.error.errorhandler.R.string.Error_Log))
+                        .setTitle(getString(R.string.Error_Log))
                         .setMessage(getAllErrorDetailsFromIntent(UCEDefaultActivity.this, getIntent()))
-                        .setPositiveButton(getString(com.error.errorhandler.R.string.Copy_Log_Close),
+                        .setPositiveButton(getString(R.string.Copy_Log_Close),
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -127,7 +127,7 @@ public final class UCEDefaultActivity extends Activity {
                                         dialog.dismiss();
                                     }
                                 })
-                        .setNeutralButton(getString(com.error.errorhandler.R.string.Close),
+                        .setNeutralButton(getString(R.string.Close),
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
@@ -153,7 +153,7 @@ public final class UCEDefaultActivity extends Activity {
         try {
             return( context.getPackageManager().getPackageInfo(context.getPackageName(), 0)).versionName;
         } catch (Exception e) {
-            return getString(com.error.errorhandler.R.string.Unknown);
+            return getString(R.string.Unknown);
         }
     }
 
@@ -185,12 +185,12 @@ public final class UCEDefaultActivity extends Activity {
         emailIntent.setType("plain/text");
         emailIntent.putExtra(Intent.EXTRA_EMAIL, emailAddressArray);
         emailIntent.putExtra(Intent.EXTRA_SUBJECT, getApplicationName(UCEDefaultActivity.this) + " Application Crash Error Log");
-        emailIntent.putExtra(Intent.EXTRA_TEXT, getString(com.error.errorhandler.R.string.email_welcome_note) + errorLog);
+        emailIntent.putExtra(Intent.EXTRA_TEXT, getString(R.string.email_welcome_note) + errorLog);
         if (txtFile.exists()) {
             Uri filePath = Uri.fromFile(txtFile);
             emailIntent.putExtra(Intent.EXTRA_STREAM, filePath);
         }
-        startActivity(Intent.createChooser(emailIntent, getString(com.error.errorhandler.R.string.Email_Error_Log)));
+        startActivity(Intent.createChooser(emailIntent, getString(R.string.Email_Error_Log)));
     }
 
     private void saveErrorLogToFile(boolean isShowToast) {
@@ -213,11 +213,11 @@ public final class UCEDefaultActivity extends Activity {
                 outputStream.write(errorLog.getBytes());
                 outputStream.close();
                 if (txtFile.exists() && isShowToast) {
-                    Toast.makeText(this, getString(com.error.errorhandler.R.string.File_Saved_Successfully), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.File_Saved_Successfully), Toast.LENGTH_SHORT).show();
                 }
             } catch (IOException e) {
                 if (isShowToast) {
-                    Toast.makeText(this, getString(com.error.errorhandler.R.string.Storage_Permission_Not_Found), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, getString(R.string.Storage_Permission_Not_Found), Toast.LENGTH_SHORT).show();
                 }
 
             }
@@ -229,18 +229,18 @@ public final class UCEDefaultActivity extends Activity {
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
         share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        share.putExtra(Intent.EXTRA_SUBJECT, getString(com.error.errorhandler.R.string.Application_Crash_Error_Log));
+        share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.Application_Crash_Error_Log));
         share.putExtra(Intent.EXTRA_TEXT, errorLog);
-        startActivity(Intent.createChooser(share, getString(com.error.errorhandler.R.string.Share_Error_Log)));
+        startActivity(Intent.createChooser(share, getString(R.string.Share_Error_Log)));
     }
 
     private void copyErrorToClipboard() {
         String errorInformation = getAllErrorDetailsFromIntent(UCEDefaultActivity.this, getIntent());
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         if (clipboard != null) {
-            ClipData clip = ClipData.newPlainText(getString(com.error.errorhandler.R.string.View_Error_Log), errorInformation);
+            ClipData clip = ClipData.newPlainText(getString(R.string.View_Error_Log), errorInformation);
             clipboard.setPrimaryClip(clip);
-            Toast.makeText(UCEDefaultActivity.this, getString(com.error.errorhandler.R.string.Error_Log_Copied), Toast.LENGTH_SHORT).show();
+            Toast.makeText(UCEDefaultActivity.this, getString(R.string.Error_Log_Copied), Toast.LENGTH_SHORT).show();
         }
     }
 
