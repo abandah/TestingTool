@@ -228,7 +228,7 @@ public final class UCEDefaultActivity extends Activity {
         String errorLog = getAllErrorDetailsFromIntent(UCEDefaultActivity.this, getIntent());
         Intent share = new Intent(Intent.ACTION_SEND);
         share.setType("text/plain");
-        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+      //  share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         share.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.Application_Crash_Error_Log));
         share.putExtra(Intent.EXTRA_TEXT, errorLog);
         startActivity(Intent.createChooser(share, getString(R.string.Share_Error_Log)));
