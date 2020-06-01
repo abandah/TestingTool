@@ -1,7 +1,7 @@
 //apply plugin: 'com.android.application'
 apply plugin: 'com.android.library'
 apply plugin: 'com.github.dcendents.android-maven'
-
+group='com.github.abandah'
 android {
     compileSdkVersion 29
 
