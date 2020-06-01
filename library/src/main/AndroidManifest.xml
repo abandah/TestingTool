@@ -1,5 +1,13 @@
-<manifest package="io.jitpack.api">
+<manifest package="com.error.handler"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <application />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <application>
+        <activity
+            android:name="com.error.handler.UCEDefaultActivity"
+            android:process=":error_activity"
+            android:screenOrientation="portrait">
+        </activity> <!-- uses-library -->
+    </application>
 
 </manifest>

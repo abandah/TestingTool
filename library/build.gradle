@@ -1,5 +1,4 @@
 apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
 
 repositories {
@@ -8,9 +7,24 @@ repositories {
     jcenter()
     maven { url "https://jitpack.io" }
 }
+/*buildscript {
 
-group = 'com.github.jitpack'
-version = '1.0'
+    repositories {
+        google()
+        jcenter()
+
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.6.3'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
+
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}*/
+group = 'com.github.abandah'
+version = '0.1.4'
 
 android {
     compileSdkVersion 28
@@ -45,9 +59,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
     implementation 'com.android.support:appcompat-v7:28.0.0-rc01'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 }
 
 task sourcesJar(type: Jar) {
