@@ -1,6 +1,6 @@
 # ErrorHandler
 [![Release](https://jitpack.io/v/abandah/ErrorHandler.svg?style=flat-square)](https://jitpack.io/#abandah/ErrorHandler)
-/v/abandah/ErrorHandler.svg
+
 > Error handling library for Android and Java
 
 Encapsulate error handling logic into objects that adhere to configurable defaults. Then pass them around as parameters or inject them via DI. 
@@ -14,14 +14,22 @@ If you are using Gradle to get a GitHub project into your build, you will need t
 **Step 1.** Add the JitPack maven repository to the list of repositories:
 
 ```gradle
-    url "https://jitpack.io"
+   allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+
+    }
+}
 ```
 
 **Step 2.**  Add the dependency information:
 
- - *Group:* com.github.Username
- - *Artifact:* Repository Name
- - *Version:* Release tag, commit hash or `master-SNAPSHOT`
+```dependencies {
+    implementation 'com.github.abandah:ErrorHandler:0.1.4'
+}
+```
 
 **That's it!** The first time you request a project JitPack checks out the code, builds it and sends the Jar files back to you.
 
