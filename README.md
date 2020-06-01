@@ -1,6 +1,5 @@
 # ErrorHandler
-[![Download](https://api.bintray.com/packages/workable/maven/ErrorHandler/images/download.svg) ](https://bintray.com/workable/maven/ErrorHandler/_latestVersion)
-[![Travis](https://travis-ci.org/Workable/java-error-handler.svg?branch=master)](https://travis-ci.org/Workable/java-error-handler)
+[![Release](https://jitpack.io/v/jitpack/maven-simple.svg?style=flat-square)](https://jitpack.io/#jitpack/maven-simple)
 
 > Error handling library for Android and Java
 
@@ -184,5 +183,4 @@ Or, if you prefer the flat-squared style:
 https://jitpack.io/v/User/Repo.svg?style=flat-square
 ```
 
-[![Release](https://jitpack.io/v/jitpack/maven-simple.svg?style=flat-square)](https://jitpack.io/#jitpack/maven-simple)
 
