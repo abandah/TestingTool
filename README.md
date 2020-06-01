@@ -1,5 +1,5 @@
 # ErrorHandler
-[![Release](https://jitpack.io/v/abandah/ErrorHandler.svg?style=flat-square)](https://jitpack.io/#jitpack/maven-simple)
+[![Release](https://jitpack.io/v/abandah/ErrorHandler.svg?style=flat-square)](https://jitpack.io/#abandah/ErrorHandler)
 /v/abandah/ErrorHandler.svg
 > Error handling library for Android and Java
 
