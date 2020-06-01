@@ -1,4 +1,4 @@
-package com.example.mylibrary;
+package com.error.handler;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
