@@ -1,4 +1,30 @@
-[![Release](https://jitpack.io/v/jitpack/maven-simple.svg)](https://jitpack.io/#jitpack/maven-simple)
+# ErrorHandler
+[![Download](https://api.bintray.com/packages/workable/maven/ErrorHandler/images/download.svg) ](https://bintray.com/workable/maven/ErrorHandler/_latestVersion)
+[![Travis](https://travis-ci.org/Workable/java-error-handler.svg?branch=master)](https://travis-ci.org/Workable/java-error-handler)
+
+> Error handling library for Android and Java
+
+Encapsulate error handling logic into objects that adhere to configurable defaults. Then pass them around as parameters or inject them via DI. 
+
+## Download
+Download the [latest JAR](https://bintray.com/workable/maven/ErrorHandler/_latestVersion) or grab via Maven:
+```xml
+<dependency>
+  <groupId>com.workable</groupId>
+  <artifactId>error-handler</artifactId>
+  <version>1.1.0</version>
+  <type>pom</type>
+</dependency>
+```
+
+or Gradle:
+
+```groovy
+compile 'com.workable:error-handler:1.1.0'
+```
+
+
+## Usage
 =====
 JitPack is a novel package repository for JVM and Android projects. It builds Git projects on demand and provides you with ready-to-use artifacts (jar, aar).
 
