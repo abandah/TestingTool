@@ -7,5 +7,17 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    <style name="TextAppearance.TextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <!--   <item name="android:padding">10dp</item>
+           <item name="android:textSize">14sp</item>
+           <item name="android:textColor">@color/lightgray</item>
+           <item name="android:artboard_white">?attr/selectableItemBackground</item>
+           <item name="hintTextAppearance">@style/HintText</item>
+           <item name="errorTextAppearance">@style/ErrorText</item>
+           <item name="android:textColor">@color/lightgray</item>
+           <item name="android:textColorHint">@color/lightgray</item>
+           <item name="colorControlNormal">@color/white</item>
+           <item name="colorControlActivated">@color/lightgray</item>
+           <item name="colorControlHighlight">@color/lightgray</item>-->
+    </style>
 </resources>
