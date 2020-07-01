@@ -63,7 +63,7 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                saveImg();
+                saveImg(null);
 
             }
         });
@@ -80,9 +80,13 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
     }
 
 
-    private void saveImg() {
+    private void saveImg(Bitmap  image) {
 
-        Bitmap image = Bitmap.createBitmap(ivDrawImg.getWidth(), ivDrawImg.getHeight(), Bitmap.Config.RGB_565);
+        if(image == null){
+         image = Bitmap.createBitmap(ivDrawImg.getWidth(), ivDrawImg.getHeight(), Bitmap.Config.RGB_565);
+        }else{
+
+        }
         ivDrawImg.draw(new Canvas(image));
 
         String uri = MediaStore.Images.Media.insertImage(getContentResolver(), image, "title", null);
@@ -127,7 +131,8 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
 
         if (requestCode == 101) {
             if(resultCode == Activity.RESULT_OK){
-               file = (File) getIntent().getExtras().get("result");
+                File file= (File) data.getExtras().get("result");
+                this.file= file;
                 Picasso.get().load(file).into(ivDrawImg);
             }
             if (resultCode == Activity.RESULT_CANCELED) {

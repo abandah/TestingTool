@@ -17,6 +17,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.util.Date;
 
 public class PhotoEdit extends AppCompatActivity {
 
@@ -39,7 +41,7 @@ public class PhotoEdit extends AppCompatActivity {
                 saveImg();
             }
         });
-        save.setOnClickListener(new View.OnClickListener() {
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent returnIntent = new Intent();
@@ -50,44 +52,33 @@ public class PhotoEdit extends AppCompatActivity {
     }
 
     private void saveImg() {
-
-        Bitmap image = Bitmap.createBitmap(ivDrawImg.getWidth(), ivDrawImg.getHeight(), Bitmap.Config.RGB_565);
-        ivDrawImg.draw(new Canvas(image));
-
-        String uri = MediaStore.Images.Media.insertImage(getContentResolver(), image, "title", null);
-
-        Log.e("uri", uri);
-
+        Date now = new Date();
+        android.text.format.DateFormat.format("yyyy-MM-dd_hh:mm:ss", now);
 
         try {
-            // Save the image to the SD card.
+            // image naming and path  to include sd card  appending name you choose for file
+            String mPath = Environment.getExternalStorageDirectory().toString() + "/" + now + ".jpg";
 
-            File folder = new File(Environment.getExternalStorageDirectory() + "/DrawTextOnImg");
+            // create bitmap screen capture
+            View v1 = getWindow().getDecorView().getRootView();
+            v1.setDrawingCacheEnabled(true);
+            Bitmap image = Bitmap.createBitmap(ivDrawImg.getWidth(), ivDrawImg.getHeight(), Bitmap.Config.RGB_565);
+            ivDrawImg.draw(new Canvas(image));
+            v1.setDrawingCacheEnabled(false);
 
-            if (!folder.exists()) {
-                folder.mkdir();
-                //folder.mkdirs();  //For creating multiple directories
-            }
+            File imageFile = new File(mPath);
 
-            File file = new File(Environment.getExternalStorageDirectory() + "/DrawTextOnImg/tempImg.png");
+            FileOutputStream outputStream = new FileOutputStream(imageFile);
+            int quality = 100;
+            image.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
+            outputStream.flush();
+            outputStream.close();
             Intent returnIntent = new Intent();
-            returnIntent.putExtra("result", file);
+            returnIntent.putExtra("result", imageFile);
             setResult(Activity.RESULT_OK, returnIntent);
             finish();
-            // FileOutputStream stream = new FileOutputStream(file);
-            //  image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            // Toast.makeText(this, "Picture saved", Toast.LENGTH_SHORT).show();
-
-            // Android equipment Gallery application will only at boot time scanning system folder
-            // The simulation of a media loading broadcast, for the preservation of images can be viewed in Gallery
-
-            /*Intent intent = new Intent();
-            intent.setAction(Intent.ACTION_MEDIA_MOUNTED);
-            intent.setData(Uri.fromFile(Environment.getExternalStorageDirectory()));
-            sendBroadcast(intent);*/
-
-        } catch (Exception e) {
-            //  Toast.makeText(this, "Save failed", Toast.LENGTH_SHORT).show();
+        } catch (Throwable e) {
+            // Several error may come out with file handling or DOM
             e.printStackTrace();
         }
 
