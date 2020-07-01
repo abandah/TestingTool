@@ -8,11 +8,16 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
 import com.github.tbouron.shakedetector.library.ShakeDetector;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Abandah on 7/1/2020.
@@ -103,8 +108,12 @@ public class App extends Application {
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
             outputStream.flush();
             outputStream.close();
-
-            openScreenshot(imageFile);
+            Fragment f = getVisibleFragment(activeActivity);
+            String g = "";
+            if(f != null){
+                g ="";
+            }
+            openScreenshot(imageFile,activeActivity.getLocalClassName());
         } catch (Throwable e) {
             // Several error may come out with file handling or DOM
             e.printStackTrace();
@@ -123,8 +132,20 @@ public class App extends Application {
         }
         return activeActivity;
     }
-
-    private void openScreenshot(File imageFile) {
+    public Fragment getVisibleFragment(Activity activity){
+        if(activity instanceof FragmentActivity) {
+            FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
+            List<Fragment> fragments = fragmentManager.getFragments();
+            if (fragments != null) {
+                for (Fragment fragment : fragments) {
+                    if (fragment != null && fragment.isVisible())
+                        return fragment;
+                }
+            }
+        }
+        return null;
+    }
+    private void openScreenshot(File imageFile, String localClassName) {
         //   Intent intent = new Intent();
         //   intent.setAction(Intent.ACTION_VIEW);
         // Uri uri = Uri.fromFile(imageFile);
@@ -132,6 +153,7 @@ public class App extends Application {
         //  startActivity(intent);
         Intent intent = new Intent(this, ViewScreenShot_Activity.class);
         intent.putExtra("picture", imageFile);
+        intent.putExtra("localClassName", localClassName);
         startActivity(intent);
     }
 
