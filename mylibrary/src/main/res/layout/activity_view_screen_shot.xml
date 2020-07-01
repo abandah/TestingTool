@@ -37,7 +37,7 @@
                 </com.google.android.material.textfield.TextInputEditText>
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.error.handler.DrawView
+            <ImageView
                 android:id="@+id/iv_draw"
                 android:focusable="true"
                 android:layout_width="match_parent"

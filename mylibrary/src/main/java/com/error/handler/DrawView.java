@@ -64,10 +64,10 @@ public class DrawView extends androidx.appcompat.widget.AppCompatImageView {
             canvas.drawPath(holder.path, holder.paint);
         }
     }
-    @Override
+  /*  @Override
     public void setOnTouchListener(OnTouchListener l) {
         super.setOnTouchListener(null);
-    }
+    }*/
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {

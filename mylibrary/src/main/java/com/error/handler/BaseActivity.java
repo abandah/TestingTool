@@ -100,7 +100,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
             File imageFile = new File(mPath);
 
-            FileOutputStream outputStream = new FileOutputStream(imageFile);
+          FileOutputStream outputStream = new FileOutputStream(imageFile);
             int quality = 100;
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
             outputStream.flush();

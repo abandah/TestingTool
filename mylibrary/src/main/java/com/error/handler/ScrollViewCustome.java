@@ -26,13 +26,18 @@ public class ScrollViewCustome extends ScrollView {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
+/*
     @Override
     public void setOnTouchListener(OnTouchListener l) {
         super.setOnTouchListener(null);
     }
+*/
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
+        if(ev.getPointerCount() <2){
+            return false;
+        }
             return super.onTouchEvent(ev);
     }
 }

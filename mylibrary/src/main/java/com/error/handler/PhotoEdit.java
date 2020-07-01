@@ -8,77 +8,46 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
-import java.io.FileOutputStream;
 
-public class ViewScreenShot_Activity extends AppCompatActivity {
+public class PhotoEdit extends AppCompatActivity {
 
     ImageView ivDrawImg;
-    ScrollViewCustome scrollView;
+    Button save, cancel;
     File file;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //    DrawingView mDrawingView=new DrawingView(this);
-
-        setContentView(R.layout.activity_view_screen_shot);
-        //   DrawingView  mDrawingView =findViewById(R.id.pic);
+        setContentView(R.layout.activity_photo_edit);
         file = (File) getIntent().getExtras().get("picture");
-        /*if (file.exists()) {
-            String fp = file.getAbsolutePath();
-            Drawable d = Drawable.createFromPath(file.getAbsolutePath());
-            mDrawingView.setBackground(d);
-        } else {
-            System.out.println("File Not Found");
-        }*/
-
-
         ivDrawImg = findViewById(R.id.iv_draw);
-        ivDrawImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ViewScreenShot_Activity.this,PhotoEdit.class);
-                intent.putExtra("picture",file);
-                startActivityForResult(intent,101);
-            }
-        });
-        scrollView = findViewById(R.id.scrollView);
+        save = findViewById(R.id.save);
+        cancel = findViewById(R.id.cancel);
         Picasso.get().load(file).into(ivDrawImg);
-        Button btnSave = (Button) findViewById(R.id.btn_save);
-        Button btnResume = (Button) findViewById(R.id.btn_resume);
-
-
-        btnSave.setOnClickListener(new View.OnClickListener() {
-
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 saveImg();
-
             }
         });
-
-        btnResume.setOnClickListener(new View.OnClickListener() {
-
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent returnIntent = new Intent();
+                setResult(Activity.RESULT_CANCELED, returnIntent);
                 finish();
             }
         });
-
-
     }
-
 
     private void saveImg() {
 
@@ -101,10 +70,13 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
             }
 
             File file = new File(Environment.getExternalStorageDirectory() + "/DrawTextOnImg/tempImg.png");
-
-            FileOutputStream stream = new FileOutputStream(file);
-            image.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            Toast.makeText(this, "Picture saved", Toast.LENGTH_SHORT).show();
+            Intent returnIntent = new Intent();
+            returnIntent.putExtra("result", file);
+            setResult(Activity.RESULT_OK, returnIntent);
+            finish();
+            // FileOutputStream stream = new FileOutputStream(file);
+            //  image.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            // Toast.makeText(this, "Picture saved", Toast.LENGTH_SHORT).show();
 
             // Android equipment Gallery application will only at boot time scanning system folder
             // The simulation of a media loading broadcast, for the preservation of images can be viewed in Gallery
@@ -115,25 +87,9 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
             sendBroadcast(intent);*/
 
         } catch (Exception e) {
-            Toast.makeText(this, "Save failed", Toast.LENGTH_SHORT).show();
+            //  Toast.makeText(this, "Save failed", Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
 
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 101) {
-            if(resultCode == Activity.RESULT_OK){
-               file = (File) getIntent().getExtras().get("result");
-                Picasso.get().load(file).into(ivDrawImg);
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code if there's no result
-            }
-        }
-    }//onActivityResult
 }
-
