@@ -21,17 +21,9 @@ public interface ErrorHandler_Client {
                                 @Field("Error_Details") String Error_Details,
                                 @Field("Error_note") String Error_note);
 
-    @FormUrlEncoded
-    @POST("SendError")
-    Call<JsonElement> SendFeedback(@Field("Error_Product") String Error_Product,
-                                   @Field("Error_Customer") String Error_Customer,
-                                   @Field("Error_Page") String Error_Page,
-                                   @Field("Error_Message") String Error_Message,
-                                   @Field("Error_Details") String Error_Details,
-                                   @Field("Error_note") String Error_note);
 
     @Multipart
-    @POST("RegisterGmail")
+    @POST("SendFeedback")
     Call<JsonElement> SendFeedback(@Part MultipartBody.Part file,
                                    @Part("localClassName") String localClassName,
                                    @Part("localFragmentClassName") String localFragmentClassName,

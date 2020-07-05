@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 
+import androidx.annotation.LayoutRes;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -26,7 +27,7 @@ import java.util.List;
 /**
  * Created by Abandah on 7/1/2020.
  */
-public class App extends Application {
+public abstract class App extends Application {
 
     private Activity activeActivity;
 
@@ -35,9 +36,11 @@ public class App extends Application {
         super.onCreate();
         new UCEHandler.Builder(this)
                 .setTrackActivitiesEnabled(false)
-                .setLink("WebService Link here")
+                .setLink(ErrorLink())
                 .build();
         setupActivityListener();
+
+        ViewScreenShot_Activity.Link = getFeedbackLink();
 
         ShakeDetector.create(this, new ShakeDetector.OnShakeListener() {
             @Override
@@ -52,6 +55,9 @@ public class App extends Application {
         // .build();
     }
 
+    protected abstract String getFeedbackLink();
+
+    protected abstract String ErrorLink() ;
 
     private void setupActivityListener() {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {

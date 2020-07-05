@@ -37,7 +37,7 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
     File file;
     private String localClassName,localFragmentClassName;
     TextInputEditText note;
-
+    static String Link;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -176,7 +176,7 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
         RequestBody requestImageFile = RequestBody.create(MediaType.parse("image/*"), file);
         part = MultipartBody.Part.createFormData("any_name_for_the_part", file.getName(), requestImageFile);
 
-        Retrofit retrofit = RetrofitClientInstanceWithLink.getRetrofitInstance(UCEHandler.Link);
+        Retrofit retrofit = RetrofitClientInstanceWithLink.getRetrofitInstance(Link);
         ErrorHandler_Client errorHandler_client = retrofit.create(ErrorHandler_Client.class);
         Call<JsonElement> call = errorHandler_client.SendFeedback(part,
                 localClassName,

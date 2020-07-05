@@ -6,4 +6,16 @@ public class App extends com.feedback.handler.App {
     public void onCreate() {
         super.onCreate();
     }
+
+    @Override
+    protected String getFeedbackLink() {
+        return "";
+    }
+
+    @Override
+    protected String ErrorLink() {
+        return "";
+    }
+
+
 }
