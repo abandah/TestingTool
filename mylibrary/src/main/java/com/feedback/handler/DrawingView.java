@@ -1,4 +1,4 @@
-package com.error.handler;
+package com.feedback.handler;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,8 +9,6 @@ import android.graphics.Path;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ImageView;
 
 /**
  * Created by Abandah on 6/29/2020.

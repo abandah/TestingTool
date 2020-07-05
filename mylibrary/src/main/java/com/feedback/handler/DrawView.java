@@ -1,4 +1,4 @@
-package com.error.handler;
+package com.feedback.handler;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.error.handler;
+package com.feedback.handler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -21,7 +22,7 @@ import java.util.Deque;
 import java.util.List;
 import java.util.Locale;
 
-public final class TestToolHandler {
+public final class UCEHandler {
     public static final String eXTRA_ErrorMessage = "ErrorMessage";
     public static final String eXTRA_StackTrace = "StackTrace";
     static final String eXTRA_STACK_TRACE = "eXTRA_STACK_TRACE";
@@ -48,7 +49,7 @@ public final class TestToolHandler {
     private static WeakReference<Activity> lastActivityCreated = new WeakReference<>(null);
 
 
-    TestToolHandler(Builder builder) {
+    UCEHandler(Builder builder) {
         isUCEHEnabled = builder.isUCEHEnabled;
         isTrackActivitiesEnabled = builder.isTrackActivitiesEnabled;
         isBackgroundMode = builder.isBackgroundModeEnabled;
@@ -290,8 +291,8 @@ public final class TestToolHandler {
             return this;
         }
 
-        public TestToolHandler build() {
-            return new TestToolHandler(this);
+        public UCEHandler build() {
+            return new UCEHandler(this);
         }
 
         public Builder setLink(String link) {

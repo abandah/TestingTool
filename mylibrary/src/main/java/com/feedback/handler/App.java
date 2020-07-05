@@ -1,4 +1,4 @@
-package com.error.handler;
+package com.feedback.handler;
 
 import android.Manifest;
 import android.app.Activity;
@@ -17,17 +17,11 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.tbouron.shakedetector.library.ShakeDetector;
-import com.google.gson.JsonElement;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 /**
  * Created by Abandah on 7/1/2020.

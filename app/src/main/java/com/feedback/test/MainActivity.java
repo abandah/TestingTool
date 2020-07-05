@@ -1,4 +1,4 @@
-package com.error.test;
+package com.feedback.test;
 
 import android.os.Bundle;
 

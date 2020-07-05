@@ -1,9 +1,8 @@
-package com.error.handler;
+package com.feedback.handler;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Environment;
@@ -20,12 +19,8 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonElement;
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;

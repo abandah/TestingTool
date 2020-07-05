@@ -6,7 +6,7 @@
                                                    android:layout_height="match_parent"
                                                    tools:context=".PhotoEdit">
 
-    <com.error.handler.DrawView
+    <com.feedback.handler.DrawView
         android:id="@+id/iv_draw"
         android:layout_width="wrap_content"
         android:layout_height="0dp"

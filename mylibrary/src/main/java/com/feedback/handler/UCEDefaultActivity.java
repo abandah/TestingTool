@@ -15,7 +15,7 @@
  *  * limitations under the License.
  *
  */
-package com.error.handler;
+package com.feedback.handler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
