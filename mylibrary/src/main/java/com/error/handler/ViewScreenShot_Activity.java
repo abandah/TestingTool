@@ -3,12 +3,12 @@ package com.error.handler;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -16,16 +16,33 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.gson.JsonElement;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class ViewScreenShot_Activity extends AppCompatActivity {
 
     ImageView ivDrawImg;
     ScrollViewCustome scrollView;
     File file;
+    private String localClassName,localFragmentClassName;
+    TextInputEditText note;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +50,11 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
 
         setContentView(R.layout.activity_view_screen_shot);
         //   DrawingView  mDrawingView =findViewById(R.id.pic);
+        note = findViewById(R.id.note);
         file = (File) getIntent().getExtras().get("picture");
+        localClassName = (String) getIntent().getStringExtra("localClassName");
+        localFragmentClassName = (String) getIntent().getStringExtra("localFragmentClassName");
+
         /*if (file.exists()) {
             String fp = file.getAbsolutePath();
             Drawable d = Drawable.createFromPath(file.getAbsolutePath());
@@ -62,8 +83,18 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
-                saveImg(null);
+               // Intent intent = new Intent();
+               // setResult(Activity.RESULT_OK, intent);
+               // intent.putExtra("picture", file);
+               // intent.putExtra("localClassName", localClassName);
+                //intent.putExtra("localFragmentClassName", localFragmentClassName);
+                String notetext = note.getText().toString();
+                if(notetext.isEmpty()){
+                    return;
+                }
+                SendFeedback(file,localClassName,localFragmentClassName,notetext);
+                finish();
+               // saveImg(null);
 
             }
         });
@@ -140,5 +171,37 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
             }
         }
     }//onActivityResult
+
+    private void SendFeedback(File file, String localClassName, String localFragmentClassName, String notetext) {
+        String Error_Product = "OfferSwiper";
+        String Error_Customer = "Android";
+        MultipartBody.Part part = null;
+
+
+        RequestBody requestImageFile = RequestBody.create(MediaType.parse("image/*"), file);
+        part = MultipartBody.Part.createFormData("any_name_for_the_part", file.getName(), requestImageFile);
+
+        Retrofit retrofit = RetrofitClientInstanceWithLink.getRetrofitInstance(UCEHandler.Link);
+        ErrorHandler_Client errorHandler_client = retrofit.create(ErrorHandler_Client.class);
+        Call<JsonElement> call = errorHandler_client.SendFeedback(part,
+                localClassName,
+                localFragmentClassName,
+                notetext,
+                Error_Product,
+                Error_Customer);
+
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+
+
+            }
+        });
+    }
 }
 

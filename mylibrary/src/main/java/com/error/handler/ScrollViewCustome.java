@@ -35,9 +35,9 @@ public class ScrollViewCustome extends ScrollView {
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
-        if(ev.getPointerCount() <2){
-            return false;
-        }
+      //  if(ev.getPointerCount() <2){
+      //      return false;
+       // }
             return super.onTouchEvent(ev);
     }
 }

@@ -1,23 +1,33 @@
 package com.error.handler;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.github.tbouron.shakedetector.library.ShakeDetector;
+import com.google.gson.JsonElement;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Created by Abandah on 7/1/2020.
@@ -80,11 +90,15 @@ public class App extends Application {
             @Override
             public void onActivityDestroyed(Activity activity) {
             }
+
         });
     }
 
     private void takeScreenshot() {
         if (getActiveActivity() == null) {
+            return;
+        }
+        if(!isStoragePermissionGranted()){
             return;
         }
         Date now = new Date();
@@ -106,14 +120,16 @@ public class App extends Application {
             FileOutputStream outputStream = new FileOutputStream(imageFile);
             int quality = 100;
             bitmap.compress(Bitmap.CompressFormat.JPEG, quality, outputStream);
-            outputStream.flush();
-            outputStream.close();
+         //   outputStream.flush();
+          //  outputStream.close();
             Fragment f = getVisibleFragment(activeActivity);
             String g = "";
-            if(f != null){
-                g ="";
+            if (f != null) {
+                g = f.toString();
+                String s[] = g.split("\\{");
+                g = s[0];
             }
-            openScreenshot(imageFile,activeActivity.getLocalClassName());
+            openScreenshot(imageFile, activeActivity.getLocalClassName(), g);
         } catch (Throwable e) {
             // Several error may come out with file handling or DOM
             e.printStackTrace();
@@ -121,19 +137,20 @@ public class App extends Application {
     }
 
     public Activity getActiveActivity() {
-        if(activeActivity.getLocalClassName().equalsIgnoreCase(ViewScreenShot_Activity.class.getName())){
+        if (activeActivity.getLocalClassName().equalsIgnoreCase(ViewScreenShot_Activity.class.getName())) {
             return null;
         }
-        if(activeActivity.getLocalClassName().equalsIgnoreCase(UCEDefaultActivity.class.getName())){
+        if (activeActivity.getLocalClassName().equalsIgnoreCase(UCEDefaultActivity.class.getName())) {
             return null;
         }
-        if(activeActivity.getLocalClassName().equalsIgnoreCase(PhotoEdit.class.getName())){
+        if (activeActivity.getLocalClassName().equalsIgnoreCase(PhotoEdit.class.getName())) {
             return null;
         }
         return activeActivity;
     }
-    public Fragment getVisibleFragment(Activity activity){
-        if(activity instanceof FragmentActivity) {
+
+    public Fragment getVisibleFragment(Activity activity) {
+        if (activity instanceof FragmentActivity) {
             FragmentManager fragmentManager = ((FragmentActivity) activity).getSupportFragmentManager();
             List<Fragment> fragments = fragmentManager.getFragments();
             if (fragments != null) {
@@ -145,7 +162,8 @@ public class App extends Application {
         }
         return null;
     }
-    private void openScreenshot(File imageFile, String localClassName) {
+
+    private void openScreenshot(File imageFile, String localClassName, String g) {
         //   Intent intent = new Intent();
         //   intent.setAction(Intent.ACTION_VIEW);
         // Uri uri = Uri.fromFile(imageFile);
@@ -154,7 +172,22 @@ public class App extends Application {
         Intent intent = new Intent(this, ViewScreenShot_Activity.class);
         intent.putExtra("picture", imageFile);
         intent.putExtra("localClassName", localClassName);
-        startActivity(intent);
+        intent.putExtra("localFragmentClassName", g);
+        activeActivity.startActivityForResult(intent,486);
+    }
+
+    public boolean isStoragePermissionGranted() {
+        if (activeActivity == null)
+            return false;
+        if (ContextCompat.checkSelfPermission(activeActivity, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activeActivity, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1);
+            return false;
+        }
+        if (ContextCompat.checkSelfPermission(activeActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(activeActivity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            return false;
+        }
+        return true;
     }
 
 }
