@@ -59,6 +59,7 @@ public abstract class App extends Application {
 
     protected abstract String ErrorLink() ;
 
+
     private void setupActivityListener() {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
             @Override

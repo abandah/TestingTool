@@ -1,7 +1,9 @@
 package com.feedback.handler;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -37,6 +39,8 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
     File file;
     private String localClassName,localFragmentClassName;
     TextInputEditText note;
+    String Error_Product = "";
+    String Error_Customer = "Android";
     static String Link;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +48,7 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
         //    DrawingView mDrawingView=new DrawingView(this);
 
         setContentView(R.layout.activity_view_screen_shot);
+        Error_Product = getApplicationName(this);
         //   DrawingView  mDrawingView =findViewById(R.id.pic);
         note = findViewById(R.id.note);
         file = (File) getIntent().getExtras().get("picture");
@@ -87,6 +92,9 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
                 if(notetext.isEmpty()){
                     return;
                 }
+                localClassName = localClassName == null ?"":localClassName;
+                localFragmentClassName = localFragmentClassName == null ?"":localFragmentClassName;
+                notetext = notetext == null ?"":notetext;
                 SendFeedback(file,localClassName,localFragmentClassName,notetext);
                 finish();
                // saveImg(null);
@@ -104,7 +112,11 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
 
 
     }
-
+    public String getApplicationName(Context context) {
+        ApplicationInfo applicationInfo = context.getApplicationInfo();
+        int stringId = applicationInfo.labelRes;
+        return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
+    }
 
     private void saveImg(Bitmap  image) {
 
