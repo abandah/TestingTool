@@ -20,4 +20,15 @@
            <item name="colorControlActivated">@color/lightgray</item>
            <item name="colorControlHighlight">@color/lightgray</item>-->
     </style>
+    <style name="TextAppearance.InputSmallfield">
+    </style>
+    <style name="TextAppearance.TextInputEditTextClickable" parent="TextAppearance.InputSmallfield">
+    <item name="android:lines">1</item>
+    <item name="android:maxLines">1</item>
+    <item name="android:focusableInTouchMode">false</item>
+    </style>
+    <style name="TextAppearance">
+
+
+    </style>
 </resources>
