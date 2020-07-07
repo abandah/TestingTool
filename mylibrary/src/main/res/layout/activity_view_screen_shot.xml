@@ -85,7 +85,7 @@
         android:layout_width="match_parent"
         android:id="@+id/progress_circular"
         android:layout_height="match_parent"
-        android:visibility="visible"
+        android:visibility="gone"
         android:background="#80C0C0C0">
         <ProgressBar
             android:layout_centerInParent="true"
