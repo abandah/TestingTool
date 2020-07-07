@@ -3,46 +3,59 @@
                                                    xmlns:app="http://schemas.android.com/apk/res-auto"
                                                    xmlns:tools="http://schemas.android.com/tools"
                                                    android:layout_width="match_parent"
-                                                   android:background="#000000"
                                                    android:layout_height="match_parent"
+                                                   android:padding="10dp"
                                                    tools:context=".PhotoEdit">
 
-    <com.feedback.handler.DrawView
-        android:id="@+id/iv_draw"
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:adjustViewBounds="true"
-        android:focusable="true"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_block"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
+        <com.feedback.handler.DrawView
+            android:id="@+id/iv_draw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:focusable="true" />
+    </LinearLayout>
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginBottom="10dp">
 
         <Button
             android:id="@+id/save"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginEnd="5dp"
             android:layout_weight="1"
-            android:text="save" />
+            android:background="@drawable/backgroundblack_block"
+            android:text="save"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/cancel"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginStart="5dp"
             android:layout_weight="1"
-            android:text="Cancel" />
+            android:background="@drawable/backgroundblack_block"
+            android:text="Cancel"
+            android:textColor="@color/white" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

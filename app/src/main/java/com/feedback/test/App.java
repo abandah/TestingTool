@@ -9,7 +9,7 @@ public class App extends com.feedback.handler.App {
 
     @Override
     protected String getFeedbackLink() {
-        return "";
+        return "http://192.168.0.48/MOB_OfferAt/websrv/mobileapp.asmx/";
     }
 
     @Override

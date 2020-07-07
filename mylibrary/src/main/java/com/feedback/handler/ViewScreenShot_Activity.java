@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,6 +43,7 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
     String Error_Product = "";
     String Error_Customer = "Android";
     static String Link;
+    RelativeLayout progress_circular;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +53,7 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
         Error_Product = getApplicationName(this);
         //   DrawingView  mDrawingView =findViewById(R.id.pic);
         note = findViewById(R.id.note);
+        progress_circular = findViewById(R.id.progress_circular);
         file = (File) getIntent().getExtras().get("picture");
         localClassName = (String) getIntent().getStringExtra("localClassName");
         localFragmentClassName = (String) getIntent().getStringExtra("localFragmentClassName");
@@ -96,7 +99,7 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
                 localFragmentClassName = localFragmentClassName == null ?"":localFragmentClassName;
                 notetext = notetext == null ?"":notetext;
                 SendFeedback(file,localClassName,localFragmentClassName,notetext);
-                finish();
+               
                // saveImg(null);
 
             }
@@ -180,7 +183,8 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
     }//onActivityResult
 
     private void SendFeedback(File file, String localClassName, String localFragmentClassName, String notetext) {
-        String Error_Product = "OfferSwiper";
+        progress_circular.setVisibility(View.VISIBLE);
+        //String Error_Product = "OfferSwiper";
         String Error_Customer = "Android";
         MultipartBody.Part part = null;
 
@@ -200,13 +204,14 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
         call.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-
+              //  progress_circular.setVisibility(View.GONE);
+                finish();
             }
 
             @Override
             public void onFailure(Call<JsonElement> call, Throwable t) {
-
-
+                progress_circular.setVisibility(View.GONE);
+                Toast.makeText(ViewScreenShot_Activity.this, "Not Sent Try Again", Toast.LENGTH_LONG).show();
             }
         });
     }
