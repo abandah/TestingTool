@@ -43,7 +43,7 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
     String Error_Product = "";
     String Error_Customer = "Android";
     static String Link;
-    RelativeLayout progress_circular;
+    RelativeLayout progress_circular,editpic;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +68,8 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
 
 
         ivDrawImg = findViewById(R.id.iv_draw);
-        ivDrawImg.setOnClickListener(new View.OnClickListener() {
+        editpic = findViewById(R.id.editpic);
+        editpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ViewScreenShot_Activity.this,PhotoEdit.class);

@@ -1,6 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.feedback.handler.ScrollViewCustome
         android:id="@+id/scrollView"
@@ -14,13 +15,70 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/background_block"
+                android:layout_marginBottom="10dp"
+                android:adjustViewBounds="true"
+                android:padding="5dp">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/iv_draw"
+                        android:focusable="true"
+                        android:adjustViewBounds="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        />
+                 <RelativeLayout
+                     android:id="@+id/editpic"
+                     android:layout_width="30dp"
+                     android:layout_height="30dp"
+                     android:layout_marginEnd="5dp"
+                     android:layout_marginBottom="5dp"
+                     android:layout_alignParentBottom="true"
+                     android:background="@drawable/editdpic">
+
+                 </RelativeLayout>
+                </RelativeLayout>
+
+            </LinearLayout>
+            <!--     style="@style/TextAppearance.TextInput"-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_block"
+                android:hint="@string/write"
+                app:hintTextColor="@color/colorPrimary"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:lines="5"
+                    android:gravity="center">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:weightSum="2"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp">
                 <Button
                     android:id="@+id/btn_resume"
@@ -43,39 +101,6 @@
                     android:textColor="#FFFFFF" />
 
             </LinearLayout>
-
-            <!--     style="@style/TextAppearance.TextInput"-->
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_block"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/note"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:lines="5">
-
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@drawable/background_block"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:adjustViewBounds="true">
-    <ImageView
-        android:id="@+id/iv_draw"
-        android:focusable="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-       />
-</LinearLayout>
-
-
-
 
         </LinearLayout>
 
