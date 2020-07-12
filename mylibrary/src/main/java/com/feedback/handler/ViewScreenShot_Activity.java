@@ -10,13 +10,16 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.gson.JsonElement;
@@ -35,15 +38,18 @@ import retrofit2.Retrofit;
 
 public class ViewScreenShot_Activity extends AppCompatActivity {
 
+    static String Link;
+    Toolbar toolbar;
     ImageView ivDrawImg;
     ScrollViewCustome scrollView;
     File file;
-    private String localClassName,localFragmentClassName;
     TextInputEditText note;
     String Error_Product = "";
     String Error_Customer = "Android";
-    static String Link;
-    RelativeLayout progress_circular,editpic;
+    RelativeLayout progress_circular, editpic;
+    private String localClassName, localFragmentClassName;
+    private String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,10 +59,30 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
         Error_Product = getApplicationName(this);
         //   DrawingView  mDrawingView =findViewById(R.id.pic);
         note = findViewById(R.id.note);
+
+        if (getSupportActionBar() == null) {
+            toolbar = findViewById(R.id.toolbar);
+            //     toolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_baseline_arrow_back_24));
+            toolbar.setTitleTextColor(getResources().getColor(R.color.white));
+            setSupportActionBar(toolbar);
+           /* toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });*/
+            toolbar.setVisibility(View.VISIBLE);
+        }
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_baseline_arrow_back_24);
+
+
         progress_circular = findViewById(R.id.progress_circular);
         file = (File) getIntent().getExtras().get("picture");
         localClassName = (String) getIntent().getStringExtra("localClassName");
         localFragmentClassName = (String) getIntent().getStringExtra("localFragmentClassName");
+        userId = (String) getIntent().getStringExtra("userId");
 
         /*if (file.exists()) {
             String fp = file.getAbsolutePath();
@@ -72,9 +98,9 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
         editpic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ViewScreenShot_Activity.this,PhotoEdit.class);
-                intent.putExtra("picture",file);
-                startActivityForResult(intent,101);
+                Intent intent = new Intent(ViewScreenShot_Activity.this, PhotoEdit.class);
+                intent.putExtra("picture", file);
+                startActivityForResult(intent, 101);
             }
         });
         scrollView = findViewById(R.id.scrollView);
@@ -87,21 +113,21 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-               // Intent intent = new Intent();
-               // setResult(Activity.RESULT_OK, intent);
-               // intent.putExtra("picture", file);
-               // intent.putExtra("localClassName", localClassName);
+                // Intent intent = new Intent();
+                // setResult(Activity.RESULT_OK, intent);
+                // intent.putExtra("picture", file);
+                // intent.putExtra("localClassName", localClassName);
                 //intent.putExtra("localFragmentClassName", localFragmentClassName);
                 String notetext = note.getText().toString();
-                if(notetext.isEmpty()){
+                if (notetext.isEmpty()) {
                     return;
                 }
-                localClassName = localClassName == null ?"":localClassName;
-                localFragmentClassName = localFragmentClassName == null ?"":localFragmentClassName;
-                notetext = notetext == null ?"":notetext;
-                SendFeedback(file,localClassName,localFragmentClassName,notetext);
-               
-               // saveImg(null);
+                localClassName = localClassName == null ? "" : localClassName;
+                localFragmentClassName = localFragmentClassName == null ? "" : localFragmentClassName;
+                notetext = notetext == null ? "" : notetext;
+                SendFeedback(file, localClassName, localFragmentClassName, notetext);
+
+                // saveImg(null);
 
             }
         });
@@ -116,17 +142,59 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
 
 
     }
+
     public String getApplicationName(Context context) {
         ApplicationInfo applicationInfo = context.getApplicationInfo();
         int stringId = applicationInfo.labelRes;
         return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
     }
 
-    private void saveImg(Bitmap  image) {
+    private void SendFeedback(File file, String localClassName, String localFragmentClassName, String notetext) {
+        progress_circular.setVisibility(View.VISIBLE);
+        //String Error_Product = "OfferSwiper";
+        String Error_Customer = "Android";
+        MultipartBody.Part part = null;
 
-        if(image == null){
-         image = Bitmap.createBitmap(ivDrawImg.getWidth(), ivDrawImg.getHeight(), Bitmap.Config.RGB_565);
-        }else{
+
+        RequestBody requestImageFile = RequestBody.create(MediaType.parse("image/*"), file);
+        part = MultipartBody.Part.createFormData("any_name_for_the_part", file.getName(), requestImageFile);
+
+        Retrofit retrofit = RetrofitClientInstanceWithLink.getRetrofitInstance(Link);
+        ErrorHandler_Client errorHandler_client = retrofit.create(ErrorHandler_Client.class);
+        Call<JsonElement> call = errorHandler_client.SendFeedback(part,
+                localClassName,
+                localFragmentClassName,
+                notetext,
+                Error_Product,
+                Error_Customer,
+                userId);
+
+        call.enqueue(new Callback<JsonElement>() {
+            @Override
+            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                //  progress_circular.setVisibility(View.GONE);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<JsonElement> call, Throwable t) {
+                progress_circular.setVisibility(View.GONE);
+                Toast.makeText(ViewScreenShot_Activity.this, "Not Sent Try Again", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        finish();
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void saveImg(Bitmap image) {
+
+        if (image == null) {
+            image = Bitmap.createBitmap(ivDrawImg.getWidth(), ivDrawImg.getHeight(), Bitmap.Config.RGB_565);
+        } else {
 
         }
         ivDrawImg.draw(new Canvas(image));
@@ -172,9 +240,9 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == 101) {
-            if(resultCode == Activity.RESULT_OK){
-                File file= (File) data.getExtras().get("result");
-                this.file= file;
+            if (resultCode == Activity.RESULT_OK) {
+                File file = (File) data.getExtras().get("result");
+                this.file = file;
                 Picasso.get().load(file).into(ivDrawImg);
             }
             if (resultCode == Activity.RESULT_CANCELED) {
@@ -182,39 +250,5 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
             }
         }
     }//onActivityResult
-
-    private void SendFeedback(File file, String localClassName, String localFragmentClassName, String notetext) {
-        progress_circular.setVisibility(View.VISIBLE);
-        //String Error_Product = "OfferSwiper";
-        String Error_Customer = "Android";
-        MultipartBody.Part part = null;
-
-
-        RequestBody requestImageFile = RequestBody.create(MediaType.parse("image/*"), file);
-        part = MultipartBody.Part.createFormData("any_name_for_the_part", file.getName(), requestImageFile);
-
-        Retrofit retrofit = RetrofitClientInstanceWithLink.getRetrofitInstance(Link);
-        ErrorHandler_Client errorHandler_client = retrofit.create(ErrorHandler_Client.class);
-        Call<JsonElement> call = errorHandler_client.SendFeedback(part,
-                localClassName,
-                localFragmentClassName,
-                notetext,
-                Error_Product,
-                Error_Customer);
-
-        call.enqueue(new Callback<JsonElement>() {
-            @Override
-            public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-              //  progress_circular.setVisibility(View.GONE);
-                finish();
-            }
-
-            @Override
-            public void onFailure(Call<JsonElement> call, Throwable t) {
-                progress_circular.setVisibility(View.GONE);
-                Toast.makeText(ViewScreenShot_Activity.this, "Not Sent Try Again", Toast.LENGTH_LONG).show();
-            }
-        });
-    }
 }
 

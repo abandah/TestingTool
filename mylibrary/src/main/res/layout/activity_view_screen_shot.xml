@@ -2,12 +2,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 xmlns:app="http://schemas.android.com/apk/res-auto">
-
+<androidx.appcompat.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorPrimary"
+    android:visibility="gone"/>
     <com.feedback.handler.ScrollViewCustome
         android:id="@+id/scrollView"
+        android:layout_below="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clickable="true"
+
         android:focusable="true">
 
 
@@ -52,23 +59,29 @@
 
             </LinearLayout>
             <!--     style="@style/TextAppearance.TextInput"-->
-            <com.google.android.material.textfield.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_block"
-                android:hint="@string/write"
-                app:hintTextColor="@color/colorPrimary"
-                >
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/note"
+                android:padding="5dp"
+                android:background="@drawable/background_block">
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:lines="5"
-                    android:gravity="center">
+                    android:hint="@string/write"
+                    app:hintTextColor="@color/colorPrimary"
+                    >
 
-                </com.google.android.material.textfield.TextInputEditText>
-            </com.google.android.material.textfield.TextInputLayout>
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/note"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:lines="5"
+                        android:gravity="center">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
 
 
 
@@ -88,12 +101,13 @@
                     android:background="@drawable/backgroundblack_block"
                     android:text="Back"
                     android:textColor="#FFFFFF"
-                    android:layout_marginEnd="5dp"/>
+                    android:layout_marginEnd="5dp"
+                    android:visibility="gone"/>
                 <Button
                     android:id="@+id/btn_save"
                     android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="40dp"
+                    android:layout_weight="2"
+                    android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
                     android:layout_alignParentBottom="true"
                     android:text="Send"

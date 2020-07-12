@@ -18,8 +18,7 @@
         <activity android:name="com.feedback.handler.PhotoEdit"
                  ></activity>
         <activity android:name="com.feedback.handler.ViewScreenShot_Activity"
-                  android:label="@string/customersupport"
-            android:theme="@style/AppTheme">
+                  android:label="@string/customersupport">
 
         </activity>
         <activity

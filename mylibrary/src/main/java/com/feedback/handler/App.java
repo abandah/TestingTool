@@ -34,10 +34,10 @@ public abstract class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        new UCEHandler.Builder(this)
+     /*   new UCEHandler.Builder(this)
                 .setTrackActivitiesEnabled(false)
                 .setLink(ErrorLink())
-                .build();
+                .build();*/
         setupActivityListener();
 
         ViewScreenShot_Activity.Link = getFeedbackLink();
@@ -174,8 +174,12 @@ public abstract class App extends Application {
         intent.putExtra("picture", imageFile);
         intent.putExtra("localClassName", localClassName);
         intent.putExtra("localFragmentClassName", g);
+        intent.putExtra("userId", getUserId());
+
         activeActivity.startActivityForResult(intent,486);
     }
+
+    protected abstract String getUserId();
 
     public boolean isStoragePermissionGranted() {
         if (activeActivity == null)

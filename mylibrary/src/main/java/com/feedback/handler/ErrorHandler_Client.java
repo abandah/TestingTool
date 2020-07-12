@@ -29,5 +29,6 @@ public interface ErrorHandler_Client {
                                    @Part("localFragmentClassName") String localFragmentClassName,
                                    @Part("notetext") String notetext,
                                    @Part("error_Product") String error_Product,
-                                   @Part("error_Customer") String error_Customer);
+                                   @Part("error_Customer") String error_Customer,
+                                   @Part("userId") String userId);
 }

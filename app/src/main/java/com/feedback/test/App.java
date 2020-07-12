@@ -17,5 +17,10 @@ public class App extends com.feedback.handler.App {
         return "";
     }
 
+    @Override
+    protected String getUserId() {
+        return "0";
+    }
+
 
 }
