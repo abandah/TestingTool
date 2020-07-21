@@ -59,7 +59,7 @@ public final class UCEDefaultActivity extends Activity {
     @SuppressLint("PrivateResource")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTheme(android.R.style.Theme_Holo_Light_DarkActionBar);
+       // setTheme(android.R.style.Theme_Holo_Light_DarkActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.default_error_activity);
         try {
@@ -69,7 +69,7 @@ public final class UCEDefaultActivity extends Activity {
                     .addCommaSeparatedEmailAddresses("")
                     .build();*/
            // if (!BuildConfig.DEBUG)
-                SendError();
+               // SendError();
         } catch (Exception e) {
 
         }
@@ -346,7 +346,7 @@ public final class UCEDefaultActivity extends Activity {
     }
 
     private void SendError() {
-        String Error_Product = "OfferSwiper";
+        String Error_Product = getApplicationName(this);;
         String Error_Customer = "Android";
         String Error_Page = getError_Page(getIntent());
         String Error_Message = getErrorMessage(getIntent());

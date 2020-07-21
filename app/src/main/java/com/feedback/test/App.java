@@ -1,5 +1,7 @@
 package com.feedback.test;
 
+import android.content.Context;
+
 public class App extends com.feedback.handler.App {
 
     @Override
@@ -13,9 +15,20 @@ public class App extends com.feedback.handler.App {
     }
 
     @Override
-    protected String ErrorLink() {
-        return "";
+    protected boolean EnableErrorHandler() {
+        return false;
     }
+
+    @Override
+    protected boolean EnableFeedBack() {
+        return true;
+    }
+
+    @Override
+    protected Context context() {
+        return this;
+    }
+
 
     @Override
     protected String getUserId() {

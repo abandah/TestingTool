@@ -13,7 +13,7 @@ import retrofit2.http.Part;
 public interface ErrorHandler_Client {
 
     @FormUrlEncoded
-    @POST("SendError")
+    @POST("SendFeedback")
     Call<JsonElement> SendError(@Field("Error_Product") String Error_Product,
                                 @Field("Error_Customer") String Error_Customer,
                                 @Field("Error_Page") String Error_Page,

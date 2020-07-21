@@ -3,6 +3,7 @@ package com.feedback.handler;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -34,30 +35,29 @@ public abstract class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-     /*   new UCEHandler.Builder(this)
-                .setTrackActivitiesEnabled(false)
-                .setLink(ErrorLink())
-                .build();*/
-        setupActivityListener();
+        if(EnableErrorHandler()) {
+            new UCEHandler.Builder(context())
+                    .setTrackActivitiesEnabled(false)
+                    .setLink(getFeedbackLink())
+                    .build();
+        }
+        if(EnableFeedBack()) {
+            setupActivityListener();
+            ViewScreenShot_Activity.Link = getFeedbackLink();
+            ShakeDetector.create(this, new ShakeDetector.OnShakeListener() {
+                @Override
+                public void OnShake() {
+                    takeScreenshot();
 
-        ViewScreenShot_Activity.Link = getFeedbackLink();
-
-        ShakeDetector.create(this, new ShakeDetector.OnShakeListener() {
-            @Override
-            public void OnShake() {
-                takeScreenshot();
-
-            }
-        });
-        //   new TestToolHandler.Builder(this).build();
-        // .setTrackActivitiesEnabled(false)
-        // .setLink("WebService Link here")
-        // .build();
+                }
+            });
+        }
     }
 
     protected abstract String getFeedbackLink();
-
-    protected abstract String ErrorLink() ;
+    protected abstract boolean EnableErrorHandler();
+    protected abstract boolean EnableFeedBack();
+    protected abstract Context context();
 
 
     private void setupActivityListener() {
