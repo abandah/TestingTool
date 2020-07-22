@@ -1,13 +1,18 @@
 package com.feedback.test;
 
+
 import android.content.Context;
+
+import com.feedback.handler.UCEHandler;
 
 public class App extends com.feedback.handler.App {
 
     @Override
     public void onCreate() {
         super.onCreate();
+
     }
+
 
     @Override
     protected String getFeedbackLink() {

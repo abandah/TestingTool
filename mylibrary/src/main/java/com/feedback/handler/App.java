@@ -37,7 +37,7 @@ public abstract class App extends Application {
         super.onCreate();
         if(EnableErrorHandler()) {
             new UCEHandler.Builder(this)
-                    .setTrackActivitiesEnabled(false)
+                    .setTrackActivitiesEnabled(true)
                     .setLink(getFeedbackLink())
                     .build();
         }
@@ -53,6 +53,7 @@ public abstract class App extends Application {
             });
         }
     }
+
 
     protected abstract String getFeedbackLink();
     protected abstract boolean EnableErrorHandler();
