@@ -16,17 +16,12 @@ public class App extends com.feedback.handler.App {
 
     @Override
     protected boolean EnableErrorHandler() {
-        return false;
+        return true;
     }
 
     @Override
     protected boolean EnableFeedBack() {
         return true;
-    }
-
-    @Override
-    protected Context context() {
-        return this;
     }
 
 

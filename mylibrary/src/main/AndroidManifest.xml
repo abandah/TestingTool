@@ -22,9 +22,10 @@
 
         </activity>
         <activity
-            android:name="com.feedback.handler.UCEDefaultActivity"
+            android:name=".UCEDefaultActivity"
             android:process=":error_activity"
-            android:screenOrientation="portrait" /> <!-- uses-library -->
+            android:screenOrientation="portrait"
+            android:label="@string/ErrorHandler"/> <!-- uses-library -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

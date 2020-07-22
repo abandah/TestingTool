@@ -36,7 +36,7 @@ public abstract class App extends Application {
     public void onCreate() {
         super.onCreate();
         if(EnableErrorHandler()) {
-            new UCEHandler.Builder(context())
+            new UCEHandler.Builder(this)
                     .setTrackActivitiesEnabled(false)
                     .setLink(getFeedbackLink())
                     .build();
@@ -57,8 +57,6 @@ public abstract class App extends Application {
     protected abstract String getFeedbackLink();
     protected abstract boolean EnableErrorHandler();
     protected abstract boolean EnableFeedBack();
-    protected abstract Context context();
-
 
     private void setupActivityListener() {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallbacks() {
