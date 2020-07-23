@@ -1,6 +1,8 @@
 package com.feedback.test;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -20,7 +22,18 @@ public class MainActivity extends AppCompatActivity {
                 int y = i[3];
             }
         });
+        new Handler().postDelayed(new Runnable() {
 
+            @Override
+            public void run() {
+                start();
+            }
+        },5000);//time in milisecond
 
+    }
+
+    private void start() {
+        Intent i = new Intent(this,MainActivity2.class);
+        startActivity(i);
     }
 }

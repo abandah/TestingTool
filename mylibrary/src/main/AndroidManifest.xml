@@ -15,17 +15,18 @@
         android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.feedback.handler.PhotoEdit"
-                 ></activity>
-        <activity android:name="com.feedback.handler.ViewScreenShot_Activity"
-                  android:label="@string/customersupport">
+        <activity android:name="com.feedback.handler.PhotoEdit"></activity>
+        <activity
+            android:name="com.feedback.handler.ViewScreenShot_Activity"
+            android:label="@string/customersupport"
+            >
 
         </activity>
         <activity
             android:name=".UCEDefaultActivity"
+            android:label="@string/ErrorHandler"
             android:process=":error_activity"
-            android:screenOrientation="portrait"
-            android:label="@string/ErrorHandler"/> <!-- uses-library -->
+            android:screenOrientation="portrait" /> <!-- uses-library -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"

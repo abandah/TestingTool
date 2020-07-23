@@ -100,6 +100,7 @@ public class ViewScreenShot_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(ViewScreenShot_Activity.this, PhotoEdit.class);
                 intent.putExtra("picture", file);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivityForResult(intent, 101);
             }
         });

@@ -21,7 +21,7 @@ public class App extends com.feedback.handler.App {
 
     @Override
     protected boolean EnableErrorHandler() {
-        return true;
+        return false;
     }
 
     @Override

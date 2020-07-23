@@ -137,6 +137,9 @@ public abstract class App extends Application {
     }
 
     public Activity getActiveActivity() {
+        if(activeActivity == null){
+            return null;
+        }
         if (activeActivity.getLocalClassName().equalsIgnoreCase(ViewScreenShot_Activity.class.getName())) {
             return null;
         }
@@ -175,7 +178,7 @@ public abstract class App extends Application {
         intent.putExtra("localFragmentClassName", g);
         intent.putExtra("userId", getUserId());
 
-        activeActivity.startActivityForResult(intent,486);
+        this.startActivity(intent);
     }
 
     protected abstract String getUserId();

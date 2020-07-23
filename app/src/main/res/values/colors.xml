@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">@color/over_photos_orange</color><!-- bar above and sellected tap#007da5-->//
+    <color name="colorPrimaryDark">@color/darkgray</color><!-- NOTIFICATION BAR-->
+    <color name="colorAccent">@color/darkgray</color><!-- button under text view -->
+    <color name="over_photos_orange">#ee6b09</color>
+    <color name="darkgray">#383535</color>
+
 </resources>
