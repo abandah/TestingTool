@@ -49,13 +49,18 @@ public class app extends com.feedback.handler.App {
         return "FeedbackLink";
     }
 
-    @Override
-    protected String ErrorLink() {
-        return "ErrorLink";
+   @Override
+    protected boolean EnableErrorHandler() {
+        return false;
     }
 
     @Override
-    protected String getUserId() {
+    protected boolean EnableFeedBack() {
+        return true;
+    }
+
+    @Override
+    protected String getUserId(){
         return "UserId";
     }
 }
