@@ -19,7 +19,8 @@ public interface ErrorHandler_Client {
                                 @Field("Error_Page") String Error_Page,
                                 @Field("Error_Message") String Error_Message,
                                 @Field("Error_Details") String Error_Details,
-                                @Field("Error_note") String Error_note);
+                                @Field("Error_note") String Error_note,
+                                @Part("UserId") String userId);
 
 
     @Multipart
@@ -30,5 +31,5 @@ public interface ErrorHandler_Client {
                                    @Part("notetext") String notetext,
                                    @Part("error_Product") String error_Product,
                                    @Part("error_Customer") String error_Customer,
-                                   @Part("userId") String userId);
+                                   @Part("UserId") String userId);
 }
