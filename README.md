@@ -49,13 +49,18 @@ public class app extends com.feedback.handler.App {
         return "FeedbackLink";
     }
 
-    @Override
-    protected String ErrorLink() {
-        return "ErrorLink";
+   @Override
+    protected boolean EnableErrorHandler() {
+        return false;
     }
 
     @Override
-    protected String getUserId() {
+    protected boolean EnableFeedBack() {
+        return true;
+    }
+
+    @Override
+    protected String getUserId(){
         return "UserId";
     }
 }
@@ -72,13 +77,23 @@ public class app extends com.feedback.handler.App {
 # Server Side
 
 using Form collection retrieve the values of form elements posted to the HTTP request body, with a form using the POST method.
-the values are :
+the values For SendFeedback are :
 ```
 1- localClassName (the class name )
 2- localFragmentClassName ( the fragment name if exist )
 3- notetext ( note provided by user )
 4- error_Product (Application Name)
 5- error_Customer (Android)
-6- userId (user Id provided in App)
+6- UserId (user Id provided in App)
 and filnally the screenshot picture 
 ```
+the values For SendError are :
+```
+1- Error_Page
+2- Error_Message 
+3- Error_Details 
+4- error_Product (Application Name)
+5- error_Customer (Android)
+6- Error_note 
+7- UserId (user Id provided in App)
+``` 
