@@ -375,7 +375,8 @@ public final class UCEDefaultActivity extends AppCompatActivity {
                 Error_Page,
                 Error_Message,
                 Error_Details,
-                Error_note);
+                Error_note,
+                "s");
 
         call.enqueue(new Callback<JsonElement>() {
             @Override
